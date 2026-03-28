@@ -25,8 +25,11 @@ public class ServerCentral {
                 //se lee peticion del cliente
                 String request = input.readLine();
                 System.out.println("Cliente> petición [" + request +  "]");
-                
+
+
+
                 //se procesa la peticion y se espera resultado  
+
                 /*CONSULTA HOROSCOPO */
                 Socket sh = new Socket("localhost", 5001);
 
@@ -67,4 +70,33 @@ public class ServerCentral {
             System.err.println(ex.getMessage());
         }
     }
+
+    private static void procesarPeticion(String request) {
+        /*CONSULTA HOROSCOPO */
+        /*Socket sh = new Socket("localhost", 5001);
+
+        PrintWriter outSH = new PrintWriter(sh.getOutputStream(), true);
+        BufferedReader inSH = new BufferedReader(new InputStreamReader(sh.getInputStream()));
+
+        outSH.println(request);
+        String horoscopo = inSH.readLine();
+
+        sh.close();*/
+
+
+
+        /*CONSULTA CLIMA */
+        /*Socket sp = new Socket("localhost", 5002);
+
+        PrintWriter outSP = new PrintWriter(sp.getOutputStream(), true);
+        BufferedReader inSP = new BufferedReader(new InputStreamReader(sp.getInputStream()));
+
+        outSP.println(request);
+        String clima = inSP.readLine();
+
+        sp.close();*/
+    }
+
+
+
 }
