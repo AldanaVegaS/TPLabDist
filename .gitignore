@@ -1,0 +1,14 @@
+./Basico/ServerCentral.class
+./Basico/ServerHoroscopo.class
+./Basico/ServerClima.class
+./Basico/Cliente.class
+
+./Medio/ServerCentral.class
+./Medio/ServerHoroscopo.class
+./Medio/ServerClima.class
+./Medio/Cliente.class
+
+./Avanzado/ServerCentral.class
+./Avanzado/ServerHoroscopo.class
+./Avanzado/ServerClima.class
+./Avanzado/Cliente.class
