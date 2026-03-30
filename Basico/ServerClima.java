@@ -5,10 +5,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Random;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ServerClima {
-    private final static int PORT = 5002;
+
     public static void main(String[] args) throws IOException {
 
         String[] predicciones = {
@@ -21,10 +22,10 @@ public class ServerClima {
         ServerSocket server;
 
         try{
-            server = new ServerSocket(PORT);
+            server = new ServerSocket(Config.PORT_CLIMA);
 
             System.out.println("Servidor Clima> Iniciado correctamente.");
-            System.out.println("Servidor Clima> Escuchando peticiones en el puerto " + PORT + "...\n");
+            System.out.println("Servidor Clima> Escuchando peticiones en el puerto " + Config.PORT_CLIMA + "...\n");
         } catch (IOException ex) {
             System.err.println("Servidor Clima> Error al iniciar el servidor: " + ex.getMessage());
             return;
@@ -43,7 +44,7 @@ public class ServerClima {
 
                 String fecha = input.readLine().toUpperCase();
 
-                String respuesta = predicciones[new Random().nextInt(predicciones.length)];
+                String respuesta = predicciones[obtenerIndice(fecha, predicciones.length)];
 
                 output.flush();
                 output.println(respuesta);
@@ -58,5 +59,14 @@ public class ServerClima {
                 System.err.println("Servidor Clima> Error en la comunicación: " + ex.getMessage());
             }
         }
+    }
+
+    public static int obtenerIndice(String fechaStr, int tamaño) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fecha = LocalDate.parse(fechaStr, formatter);
+
+        long numero = fecha.toEpochDay();
+
+        return (int) (Math.abs(numero) % tamaño);
     }
 }

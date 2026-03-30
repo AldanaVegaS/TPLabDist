@@ -3,19 +3,15 @@ import java.io.*;
 import java.net.*;
 
 public class ServerCentral {
-    private final static int PORT = 5000;
-    private final static int PORT_HOROSCOPO = 5001;
-    private final static int PORT_CLIMA = 5002;
-
     public static void main(String[] args) throws IOException {
 
         ServerSocket serverSocket;
 
         try {
-            serverSocket = new ServerSocket(PORT); //socket de servidor para esperar peticiones de la red
+            serverSocket = new ServerSocket(Config.PORT); //socket de servidor para esperar peticiones de la red
             
             System.out.println("Servidor> Servidor iniciado"); //socket de servidor para esperar peticiones de la red
-            System.out.println("Servidor> En espera de cliente en el puerto " + PORT + ".");    
+            System.out.println("Servidor> En espera de cliente en el puerto " + Config.PORT + ".");    
         } catch (IOException ex) {
             System.err.println("Servidor> No se pudo iniciar el servidor: " + ex.getMessage());
             return;
@@ -46,8 +42,8 @@ public class ServerCentral {
                             signo = partes[0];
                             fecha = partes[1];
 
-                            String horoscopo = consultarServidorSecundario(PORT_HOROSCOPO, signo);
-                            String clima = consultarServidorSecundario(PORT_CLIMA, fecha);
+                            String horoscopo = consultarServidorSecundario(Config.PORT_HOROSCOPO, signo);
+                            String clima = consultarServidorSecundario(Config.PORT_CLIMA, fecha);
                             
                             String respuestaFinal = "Horóscopo: " + horoscopo + " | Clima: " + clima;
                             System.out.println("Servidor Central> Resultado armado: \"" + respuestaFinal + "\"");

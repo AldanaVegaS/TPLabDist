@@ -4,8 +4,6 @@ import java.net.*;
 
 public class Cliente {
 
-    private final static int PORT = 5000;
-    private final static String SERVER = "localhost";
     public static void main(String[] args) throws IOException {
         boolean exit = false;
         String signo, fecha, request;
@@ -36,7 +34,7 @@ public class Cliente {
                 }
 
                 request = signo + "|" + fecha;
-                socket = new Socket(SERVER, PORT); //abre socket                
+                socket = new Socket(Config.SERVER, Config.PORT); //abre socket                
                 
                 BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream())); //para leer lo que envie el servidor                 
                 PrintStream output = new PrintStream(socket.getOutputStream()); //para imprimir datos del servidor          
