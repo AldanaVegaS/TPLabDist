@@ -30,14 +30,14 @@ public class HiloServer extends Thread {
 
                 String cacheKey = request.trim().toUpperCase();
 
-                String responseCache = ServerCentral.cacheResultados.get(cacheKey);
+                String responseCache = ServerCentral.cache.getIfPresent(cacheKey);
 
                 if (responseCache != null) {
                     //cache hit, se devuelve el resultado almacenado
                     System.out.println("HiloServer " + this.idSession + "> Resultado en caché para: " + request);
                     
                 } else {
-                    responseCache = ServerCentral.cacheResultados.computeIfAbsent(cacheKey, new Function<String, String>() {
+                    responseCache = ServerCentral.cache.get(cacheKey, new Function<String, String>() {
             
                         public String apply(String key) {
                             

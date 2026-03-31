@@ -7,11 +7,17 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 
 public class ServerCentral {
     
     public static ConcurrentHashMap<String, String> cacheResultados = new ConcurrentHashMap<>();
-
+    public static Cache<String, String> cache = Caffeine.newBuilder()
+                .maximumSize(5) // máximo 3 elementos
+                .expireAfterWrite(2, TimeUnit.SECONDS) // expira en 2 segundos
+                .build();
     public static void main(String[] args) throws IOException {
 
         int idSession = 1;
