@@ -3,13 +3,7 @@
 ./Basico/ServerClima.class
 ./Basico/Cliente.class
 
-./Medio/ServerCentral.class
-./Medio/ServerHoroscopo.class
-./Medio/ServerClima.class
-./Medio/Cliente.class
-./Medio/HiloServerCentral.class
-./Medio/HiloServerHoroscopo.class
-./Medio/HiloServerClima.class
+git rm --cached ./Medio/*.class
 
 ./Avanzado/ServerCentral.class
 ./Avanzado/ServerHoroscopo.class
