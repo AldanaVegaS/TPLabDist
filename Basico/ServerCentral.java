@@ -6,6 +6,8 @@ public class ServerCentral {
     public static void main(String[] args) throws IOException {
 
         ServerSocket serverSocket;
+        String signo, fecha;
+        Socket clientSocket; //Socket de cliente
 
         try {
             serverSocket = new ServerSocket(Config.PORT); //socket de servidor para esperar peticiones de la red
@@ -17,8 +19,6 @@ public class ServerCentral {
             return;
         }
 
-        String signo, fecha;
-        Socket clientSocket; //Socket de cliente
         while(true){
             
             try{

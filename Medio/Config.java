@@ -1,4 +1,5 @@
-package Basico;
+package Medio;
+
 public class Config {
     public static final int PORT = 5000;
     public final static int PORT_HOROSCOPO = 5001;

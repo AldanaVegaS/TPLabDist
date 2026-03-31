@@ -9,17 +9,15 @@ import java.util.Random;
 import java.util.Set;
 
 public class ServerHoroscopo {
-    private final static int PORT = 5001;
 
     static Set<String> signosValidos = Set.of(
         "ARIES", "TAURO", "GEMINIS", "CANCER",
         "LEO", "VIRGO", "LIBRA", "ESCORPIO",
         "SAGITARIO", "CAPRICORNIO", "ACUARIO", "PISCIS"
-);
-
+    );
 
     public static void main(String[] args) throws IOException {
-        ServerSocket server = new ServerSocket(PORT);
+        ServerSocket server = new ServerSocket(Config.PORT_HOROSCOPO);
         System.out.println("SH listo...");
 
         while (true) {
@@ -31,7 +29,7 @@ public class ServerHoroscopo {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
             String signo = in.readLine().toUpperCase();
-            //System.out.println("SH> Petición recibida: " + signo);
+            
             if (!signosValidos.contains(signo)) {
                 out.println("Signo zodiacal no válido");
                 socket.close();
@@ -39,10 +37,10 @@ public class ServerHoroscopo {
             }
 
             String[] predicciones = {
-                    "Hoy es un buen día para tomar decisiones importantes.",
-                    "En el trabajo, la paciencia será tu mejor aliada.",
-                    "La salud es tu prioridad, cuida de ti mismo.",
-                    "Un encuentro inesperado traerá alegría a tu vida."
+                "Hoy es un buen día para tomar decisiones importantes.",
+                "En el trabajo, la paciencia será tu mejor aliada.",
+                "La salud es tu prioridad, cuida de ti mismo.",
+                "Un encuentro inesperado traerá alegría a tu vida."
             };
 
             String respuesta = predicciones[
