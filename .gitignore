@@ -1,17 +1,22 @@
-./Basico/ServerCentral.class
-./Basico/ServerHoroscopo.class
-./Basico/ServerClima.class
-./Basico/Cliente.class
+Basico/ServerCentral.class
+Basico/ServerHoroscopo.class
+Basico/ServerClima.class
+Basico/Cliente.class
 
-./Medio/ServerCentral.class
-./Medio/ServerHoroscopo.class
-./Medio/ServerClima.class
-./Medio/Cliente.class
-./Medio/HiloServerCentral.class
-./Medio/HiloServerHoroscopo.class
-./Medio/HiloServerClima.class
+Medio/ServerCentral.class
+Medio/ServerHoroscopo.class
+Medio/ServerClima.class
+Medio/Cliente.class
+Medio/HiloServerCentral.class
+Medio/HiloServerHoroscopo.class
+Medio/HiloServerClima.class
+Medio/HiloCliente.class
 
-./Avanzado/ServerCentral.class
-./Avanzado/ServerHoroscopo.class
-./Avanzado/ServerClima.class
-./Avanzado/Cliente.class
+Avanzado/ServerCentral.class
+Avanzado/ServerHoroscopo.class
+Avanzado/ServerClima.class
+Avanzado/Cliente.class
+Avanzado/HiloServerCentral.class
+Avanzado/HiloServerHoroscopo.class
+Avanzado/HiloServerClima.class
+Avanzado/HiloCliente.class
