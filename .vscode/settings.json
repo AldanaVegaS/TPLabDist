@@ -1,0 +1,6 @@
+{
+  "java.project.sourcePaths": ["src"],
+  "java.project.referencedLibraries": [
+    "lib/caffeine-3.1.8.jar"
+  ]
+}
