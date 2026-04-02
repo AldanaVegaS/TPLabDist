@@ -80,12 +80,12 @@ public class ServerClima {
     }
 
     private static boolean esFechaValida(String fechaStr) {
-    try {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate.parse(fechaStr, formatter);
-        return true;
-    } catch (DateTimeParseException e) {
-        return false;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate.parse(fechaStr, formatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
-}
 }
