@@ -21,10 +21,7 @@ Desde el directorio del proyecto:
 
 
 ```
-javac ServidorCentral.java
-javac ServidorHoroscopo.java
-javac ServidorClima.java
-javac Cliente.java
+javac Basico/*.java
 ````
 
 ---
@@ -32,7 +29,7 @@ javac Cliente.java
 ### 2. Ejecutar el servidor central
 
 ```
-java ServidorCentral
+java Basico/ServerCentral
 ```
 
 ---
@@ -42,7 +39,7 @@ java ServidorCentral
 En otra terminal:
 
 ```
-java ServidorHoroscopo
+java Basico/ServerHoroscopo
 ```
 
 ---
@@ -52,7 +49,7 @@ java ServidorHoroscopo
 En otra terminal:
 
 ```
-java ServidorClima
+java Basico/ServerClima
 ```
 
 ---
@@ -62,7 +59,7 @@ java ServidorClima
 En una tercera terminal:
 
 ```
-java Cliente
+java  Basico/Cliente
 ```
 
 ---
@@ -75,17 +72,6 @@ Para el nivel avanzado, ejecutar desde el directorio raíz del proyecto `TPLabDi
 
 ```
 javac -cp "lib/*" Avanzado/*.java
-```
-
----
-
-### 🔹 Ejecución en Windows (en terminales separadas)
-
-```
-java -cp "lib/;." Avanzado.ServerCentral
-java -cp "lib/;." Avanzado.ServerClima
-java -cp "lib/;." Avanzado.ServerHoroscopo
-java -cp "lib/;." Avanzado.Cliente
 ```
 
 ---
