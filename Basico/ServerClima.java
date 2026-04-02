@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class ServerClima {
 
@@ -44,6 +45,14 @@ public class ServerClima {
 
                 String fecha = input.readLine().toUpperCase();
 
+                if (!esFechaValida(fecha)) {
+                    output.println("Fecha no válida.");
+                    System.out.println("Servidor Clima> Pronóstico enviado: Fecha no válida.");
+                    socket.close();
+                    continue;
+                }
+
+
                 String respuesta = predicciones[obtenerIndice(fecha, predicciones.length)];
 
                 output.flush();
@@ -61,12 +70,22 @@ public class ServerClima {
         }
     }
 
-    public static int obtenerIndice(String fechaStr, int tamaño) {
+    public static int obtenerIndice(String fechaStr, int tamanio) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate fecha = LocalDate.parse(fechaStr, formatter);
 
         long numero = fecha.toEpochDay();
 
-        return (int) (Math.abs(numero) % tamaño);
+        return (int) (Math.abs(numero) % tamanio);
     }
+
+    private static boolean esFechaValida(String fechaStr) {
+    try {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate.parse(fechaStr, formatter);
+        return true;
+    } catch (DateTimeParseException e) {
+        return false;
+    }
+}
 }
