@@ -63,7 +63,7 @@ public class ServerHoroscopo {
                 out.flush();
                 out.println(respuesta);
 
-                System.out.println("Servidor Horoscopo> Pronóstico enviado: \"" + respuesta + "\"");
+                System.out.println("Servidor Horoscopo> Horóscopo enviado: \"" + respuesta + "\"");
 
                 out.close();
                 in.close();
