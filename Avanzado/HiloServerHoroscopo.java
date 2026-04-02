@@ -32,12 +32,20 @@ public class HiloServerHoroscopo extends Thread {
             
             if (!signosValidos.contains(signo)) {
                 out.println("Signo zodiacal no válido");
+                System.out.println("Servidor Horóscopo " + this.idSession + "> Signo no válido");
                 clientSocket.close();
+                return;
+            } 
             
-            } else {
-                String respuesta = predicciones[new Random().nextInt(predicciones.length)];
-                out.println(respuesta);
-            }
+            String respuesta = predicciones[new Random().nextInt(predicciones.length)];
+
+            out.flush();
+            out.println(respuesta);
+
+            System.out.println("Servidor Horóscopo " + this.idSession + "> Horóscopo enviado: \"" + respuesta + "\"");
+
+            out.close();
+            in.close();
 
             clientSocket.close();
         } catch (IOException ex) {
