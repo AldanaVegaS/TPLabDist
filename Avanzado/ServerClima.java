@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class ServerClima {
 
@@ -50,5 +51,15 @@ public class ServerClima {
         long numero = fecha.toEpochDay();
 
         return (int) (Math.abs(numero) % tamaño);
+    }
+
+    public static boolean esFechaValida(String fechaStr) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate.parse(fechaStr, formatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 }

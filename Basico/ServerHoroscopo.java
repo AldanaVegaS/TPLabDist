@@ -51,6 +51,7 @@ public class ServerHoroscopo {
                 
                 if (!signosValidos.contains(signo)) {
                     out.println("Signo zodiacal no válido");
+                    System.out.println("Servidor Horoscopo> Horóscopo enviado: Signo zodiacal no válido.");
                     socket.close();
                     continue;
                 }
@@ -62,7 +63,7 @@ public class ServerHoroscopo {
                 out.flush();
                 out.println(respuesta);
 
-                System.out.println("Servidor Horoscopo> Pronóstico enviado: \"" + respuesta + "\"");
+                System.out.println("Servidor Horoscopo> Horóscopo enviado: \"" + respuesta + "\"");
 
                 out.close();
                 in.close();

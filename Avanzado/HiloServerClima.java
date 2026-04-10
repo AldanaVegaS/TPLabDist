@@ -25,6 +25,13 @@ public class HiloServerClima extends Thread {
 
             String fecha = input.readLine().toUpperCase();
 
+            if (!ServerClima.esFechaValida(fecha)) {
+                output.println("Fecha no válida.");
+                System.out.println("Servidor Clima " + this.idSession + "> Pronóstico enviado: Fecha no válida.");
+                socket.close();
+                return;
+            }
+
             String respuesta = this.predicciones[ServerClima.obtenerIndice(fecha, this.predicciones.length)];
 
             output.flush();
