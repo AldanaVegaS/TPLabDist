@@ -1,5 +1,6 @@
-package TPLabDist.tp2_rmi.basico;
+package TPLabDist.tp2_rmi.basico.cliente;
 
+import TPLabDist.tp2_rmi.Config;
 import java.util.Scanner;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;

@@ -1,3 +1,4 @@
+package TPLabDist.tp2_rmi.basico.cliente;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

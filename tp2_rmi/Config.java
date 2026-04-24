@@ -1,4 +1,4 @@
-package TPLabDist.tp2_rmi.basico;
+package TPLabDist.tp2_rmi;
 
 public class Config {
     public static final int PORT = 5000;
