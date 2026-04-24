@@ -50,4 +50,26 @@ java TPLabDist.tp2_rmi.basico.server_central.ServerCentral
 java TPLabDist.tp2_rmi.basico.cliente.Cliente
 ```
 
-> Recomendación: verificar que todos los servidores estén activos antes de iniciar el cliente.
+## Uso del sistema
+
+1. Ejecutar todos los servidores antes de iniciar el cliente.
+2. Ingresar:
+   - Un **signo zodiacal**
+   - Una **fecha en formato `dd/mm/aaaa`**
+3. El sistema devolverá una respuesta combinada con:
+   - Horóscopo
+   - Clima
+
+## Ejecución simultánea de instancias de cliente
+
+1. Ubicarse en y habilitar script:
+
+```bash
+chmod +x TPLabDist/tp2_rmi/basico/instancias_clientes.sh 
+```
+
+2. Ejecutar script:
+
+```bash
+./TPLabDist/tp2_rmi/basico/instancias_clientes.sh 
+```
