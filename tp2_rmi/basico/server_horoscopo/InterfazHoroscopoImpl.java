@@ -48,11 +48,10 @@ public class InterfazHoroscopoImpl implements InterfazHoroscopo {
         if (!signosValidos.contains(signo)) {
             respuesta = "Error:Signo zodiacal no válido";
             System.out.println("Servidor Horoscopo> Horóscopo enviado: Signo zodiacal no válido.");
+        }else{
+            respuesta = predicciones[new Random().nextInt(predicciones.length)];
+            System.out.println("Servidor Horoscopo> Horóscopo enviado: \"" + respuesta + "\"");
         }
-
-        respuesta = predicciones[new Random().nextInt(predicciones.length)];
-        System.out.println("Servidor Horoscopo> Horóscopo enviado: \"" + respuesta + "\"");
-
         return respuesta;
     }
     

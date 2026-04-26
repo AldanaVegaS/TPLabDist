@@ -48,8 +48,6 @@ public class InterfazClimaImpl implements InterfazClima {
             respuesta = predicciones[obtenerIndice(fecha, predicciones.length)];
             System.out.println("Servidor Clima> Pronóstico enviado: \"" + respuesta + "\"");
         }
-
-        System.out.println("Servidor Clima> Pronóstico enviado: \"" + respuesta + "\"");
         
         return respuesta;
     }
