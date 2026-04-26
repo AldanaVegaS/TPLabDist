@@ -50,6 +50,46 @@ java TPLabDist.tp2_rmi.basico.server_central.ServerCentral
 java TPLabDist.tp2_rmi.basico.cliente.Cliente
 ```
 
+
+## Ejecución en nivel Avanzado
+
+### 1. Compilar
+
+Ubicarse en la carpeta que contiene `TPLabDist` y ejecutar:
+
+```bash
+javac -cp "TPLabDist/tp2_rmi/lib/*" -d . $(find TPLabDist/tp2_rmi/Avanzado -name "*.java")
+```
+
+### 2. Levantar procesos
+
+Abrir una terminal por cada instancia y ejecutar **en este orden**:
+
+1. Servidor de clima  
+
+```bash
+java -cp "TPLabDist/tp2_rmi/lib/*:." TPLabDist/tp2_rmi/Avanzado/server_clima/ServerClima.java 
+```
+
+2. Servidor de horóscopo  
+
+```bash
+java -cp "TPLabDist/tp2_rmi/lib/*:." TPLabDist/tp2_rmi/Avanzado/server_horoscopo/ServerHoroscopo
+```
+
+3. Servidor central  
+
+```bash
+java -cp "TPLabDist/tp2_rmi/lib/*:." TPLabDist/tp2_rmi/Avanzado/server_central/ServerCentral
+```
+
+4. Cliente  
+
+```bash
+java TPLabDist.tp2_rmi.basico.cliente.Cliente
+```
+
+
 ## Uso del sistema
 
 1. Ejecutar todos los servidores antes de iniciar el cliente.
@@ -69,7 +109,12 @@ chmod +x TPLabDist/tp2_rmi/basico/instancias_clientes.sh
 ```
 
 2. Ejecutar script:
-
+Para el nivel Básico/Medio
 ```bash
 ./TPLabDist/tp2_rmi/basico/instancias_clientes.sh 
+```
+
+Para el nivel Avanzado:
+```bash
+./TPLabDist/tp2_rmi/Avanzado/instancias_clientes.sh 
 ```
