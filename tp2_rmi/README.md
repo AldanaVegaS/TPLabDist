@@ -86,7 +86,7 @@ java -cp "TPLabDist/tp2_rmi/lib/*:." TPLabDist/tp2_rmi/Avanzado/server_central/S
 4. Cliente  
 
 ```bash
-java TPLabDist.tp2_rmi.basico.cliente.Cliente
+java -cp "TPLabDist/tp2_rmi/lib/*:." TPLabDist/tp2_rmi/Avanzado/cliente/Cliente
 ```
 
 
