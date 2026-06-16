@@ -20,22 +20,47 @@ function actualizarBloqueAnuncio(indice, anuncio) {
     bloque.article.classList.add('actualizado');
 }
 
+const reloj = document.getElementById('hora');
+// actualiza hora
+
+function actualizarHora(hora) {
+    if (!reloj) return;
+
+    reloj.innerText = hora;
+}
+
 // el servidor manda un anuncio por bloque al conectarse
 socket.on('estado-inicial', (anuncios) => {
     anuncios.forEach((anuncio, indice) => actualizarBloqueAnuncio(indice, anuncio));
 });
 
-// actualizaciones de bloque que empuja el servidor
-const actualizaciones$ = new rxjs.Observable(subscritor => {
-    socket.on('actualizar-bloque', (datos) => subscritor.next(datos));
-    return () => socket.off('actualizar-bloque');
+// convierte un evento del socket en un flujo (Observable) de RxJS
+const observarEvento = (nombre) => new rxjs.Observable(subscritor => {
+    socket.on(nombre, (datos) => subscritor.next(datos));
+    return () => socket.off(nombre);
 });
 
-// el observer reacciona y repinta el bloque correspondiente.
+// actualizaciones de bloque que empuja el servidor
+const actualizaciones$ = observarEvento('actualizar-bloque');
+
+// el observer reacciona y actualiza el bloque correspondiente.
 actualizaciones$.subscribe({
     next: ({ indice, anuncio }) => {
         console.log(`Bloque ${indice} actualizado:`, anuncio);
         actualizarBloqueAnuncio(indice, anuncio);
+    },
+    error: (err) => console.error('Error en el flujo:', err),
+    complete: () => console.log('Flujo terminado')
+});
+
+// actualizacion de hora que empuja el servidor
+const actualizacionHora$ = observarEvento('actualizar-hora');
+
+// el observer reacciona y actualiza la hora correspondiente.
+actualizacionHora$.subscribe({
+    next: ({ hora }) => {
+        console.log(`Hora actualizada:`, hora);
+        actualizarHora(hora);
     },
     error: (err) => console.error('Error en el flujo:', err),
     complete: () => console.log('Flujo terminado')

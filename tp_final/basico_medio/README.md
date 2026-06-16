@@ -1,7 +1,6 @@
-# TP Final — Nivel Básico: Bloque de anuncios en tiempo real
+# TP Final - Nivel Básico: Bloque de anuncios en tiempo real
 
-Aplicación con comunicación bidireccional cliente–servidor donde el **servidor empuja anuncios al navegador** sin que el cliente tenga que refrescar la página. La pantalla muestra un título **"Anuncios"** y una grilla de **4 bloques** ; el servidor va actualizando los bloques de a uno, en forma rotativa, cada 3
-segundos.
+Aplicación con comunicación bidireccional cliente–servidor donde el **servidor empuja anuncios al navegador** sin que el cliente tenga que refrescar la página. La pantalla muestra un título **"Anuncios"** y una grilla de **4 bloques** ; el servidor va actualizando los bloques de a uno, en forma rotativa, cada 3 segundos. Además incluye un **reloj** que el servidor actualiza cada segundo y empuja a todos los clientes, por lo que se ve **sincronizado** en todas las pantallas.
 
 ## Tecnologías
 
@@ -21,6 +20,9 @@ segundos.
    clientes hacia un bloque puntual.
 5. En el cliente, las actualizaciones se transforman en un `Observable` de RxJS y el
    `subscribe` repinta el bloque correspondiente.
+6. En paralelo, cada segundo el servidor emite la hora actual (`actualizar-hora`) a todos
+   los clientes. El cliente la recibe con el mismo mecanismo reactivo y la muestra en el
+   reloj; como la genera el servidor, todos la ven a la vez (sincronizada).
 
 ## Requisitos
 
@@ -46,6 +48,6 @@ Luego abrir en el navegador:
 http://localhost:3000
 ```
 
-Los bloques se irán actualizando solos. Para verlo en acción con "push" a múltiples clientes, abrir la misma URL en varias pestañas: todas cambian a la vez.
+Los bloques se irán actualizando solos. Para verlo en acción con "push" a múltiples clientes, abrir la misma URL en varias pestañas: todas cambian a la vez (incluido el reloj, que avanza sincronizado en todas).
 
 Para detener el servidor: `Ctrl + C` en la terminal.

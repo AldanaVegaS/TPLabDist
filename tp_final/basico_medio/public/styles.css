@@ -65,6 +65,10 @@ h1 {
     animation: destello 0.6s ease;
 }
 
+#hora {
+    color: #648eb8
+}
+
 @keyframes destello {
     0%   { transform: scale(1);    box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
     50%  { transform: scale(1.05); box-shadow: 0 0 24px rgba(255, 255, 255, 0.85); }

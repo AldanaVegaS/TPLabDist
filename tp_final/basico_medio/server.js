@@ -3,12 +3,13 @@ const http = require('http');
 const path = require('path');
 const { Server } = require('socket.io');
 
-const { PORT, CANTIDAD_BLOQUES, INTERVALO_ACTUALIZACION_MS } = require('./config');
+const { PORT, CANTIDAD_BLOQUES, INTERVALO_ACTUALIZACION_MS, INTERVALO_RELOJ_MS } = require('./config');
 const { anuncioAleatorio } = require('./anuncios');
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -26,6 +27,11 @@ setInterval(() => {
     io.emit('actualizar-bloque', { indice: indiceBloque, anuncio: anuncioAleatorio() });
     indiceBloque = (indiceBloque + 1) % CANTIDAD_BLOQUES;
 }, INTERVALO_ACTUALIZACION_MS);
+
+// cada un segundo el servidor actualiza la hora
+setInterval(() => {
+    io.emit('actualizar-hora', { hora: new Date().toLocaleTimeString('es-AR', { hour12: false }) });
+}, INTERVALO_RELOJ_MS);
 
 server.listen(PORT, () => {
     console.log(`Servidor de anuncios corriendo en http://localhost:${PORT}`);
