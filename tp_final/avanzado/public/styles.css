@@ -1,3 +1,51 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    gap: 10px;
+    margin: 0;
+    padding: 20px;
+    font-family: sans-serif;
+}
+
+h1 {
+    margin: 0;
+    text-align: center;
+}
+
+.columnas {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    min-height: 0;
+}
+
+.columnas > div {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+#usuarios {
+    flex: 0 0 350px;
+}
+
+#dibujo-canvas {
+    flex: 1;
+    align-items: center;
+}
+
+/* Columna derecha: chat */
+#chat-jugadores {
+    flex: 0 0 500px;
+}
+
 .contenedor {
     display: flex;
     gap: 20px; /* Espacio entre círculos */
@@ -11,9 +59,9 @@
 }
 
 .circulo {
-    width: 40px; 
+    width: 40px;
     height: 40px;
-    border-radius: 50%;  
+    border-radius: 50%;
 }
 
 /* Colores individuales */
