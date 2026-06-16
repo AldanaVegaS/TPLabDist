@@ -1,0 +1,38 @@
+.contenedor {
+    display: flex;
+    gap: 20px; /* Espacio entre círculos */
+    padding: 20px;
+}
+
+.contenedor-circulos {
+    display: flex;
+    gap: 20px; /* Espacio entre círculos */
+    padding: 20px;
+}
+
+.circulo {
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%;  
+}
+
+/* Colores individuales */
+.circulo-rojo { background-color: #FF0000; }
+.circulo-azul { background-color: #0B52D6; }
+.circulo-verde { background-color: #21c640; }
+.circulo-amarillo { background-color: #FFD133; }
+.circulo-violeta { background-color: #9d23de; }
+.circulo-rosa { background-color: #e773e0; }
+.circulo-marron { background-color: #89602e; }
+.circulo-naranja { background-color: #FD801A; }
+
+i {
+    color: #000000; /* Cambia el color del icono */
+    font-size: 2rem; /* Cambia el tamaño del icono */
+    margin: 10px; /* Agrega espacio alrededor */
+}
+
+button{
+    background-color: rgb(255, 255, 255);
+    border-color: white;
+}

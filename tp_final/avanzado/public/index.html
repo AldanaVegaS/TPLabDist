@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinturillo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+</head>
+<html>
+    <body>
+        <div class="contenedor">
+            <button onclick="erase('#FFFFFF')">
+                <i class="fas fa-eraser"></i>
+            </button>
+            <button onclick="changeColor('#000000')"> 
+                <i class="fas fa-pencil-alt"></i>  
+            </button>
+            
+        </div>
+        <div class="contenedor-circulos">
+            <button class="circulo circulo-rojo" onclick="changeColor('#FF0000')"></button>
+            <button class="circulo circulo-azul" onclick="changeColor('#0B52D6')"></button>
+            <button class="circulo circulo-verde" onclick="changeColor('#21c640')"></button>
+            <button class="circulo circulo-amarillo" onclick="changeColor('#FFD133')"></button>
+            <button class="circulo circulo-violeta" onclick="changeColor('#9d23de')"></button>
+            <button class="circulo circulo-rosa" onclick="changeColor('#e773e0')"></button>
+            <button class="circulo circulo-marron" onclick="changeColor('#89602e')"></button>
+            <button class="circulo circulo-naranja" onclick="changeColor('#FD801A')"></button>
+        </div>
+       
+        <canvas id="lienzo" width="500" height="500" style="border:1px solid #000000;">
+        
+        </canvas>
+
+        <script src="../canva.js"></script>
+    </body>
+</html>
