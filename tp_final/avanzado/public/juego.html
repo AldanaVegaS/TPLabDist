@@ -15,10 +15,10 @@
         </div>
         <div id="dibujo-canvas">
             <div class="contenedor-herrramientas">
-                <button class="tool-btn" onclick="erase()">
+                <button class="tool-btn" id="eraser" onclick="erase()">
                     <i class="fas fa-eraser"></i>
                 </button>
-                <button class="tool-btn"onclick="pencil()"> 
+                <button class="tool-btn" id="pencil" onclick="pencil()"> 
                     <i class="fas fa-pencil-alt"></i>  
                 </button>
 
@@ -32,15 +32,18 @@
 
                 <div class="divider"></div>
             
-                <button class="circulo circulo-negro" onclick="changeColor('#000000')"></button>
-                <button class="circulo circulo-rojo" onclick="changeColor('#FF0000')"></button>
-                <button class="circulo circulo-azul" onclick="changeColor('#0B52D6')"></button>
-                <button class="circulo circulo-verde" onclick="changeColor('#21c640')"></button>
-                <button class="circulo circulo-amarillo" onclick="changeColor('#FFD133')"></button>
-                <button class="circulo circulo-violeta" onclick="changeColor('#9d23de')"></button>
-                <button class="circulo circulo-rosa" onclick="changeColor('#e773e0')"></button>
-                <button class="circulo circulo-marron" onclick="changeColor('#89602e')"></button>
-                <button class="circulo circulo-naranja" onclick="changeColor('#FD801A')"></button>
+                <div class="contenedor-circulos">
+                    <button class="circulo circulo-negro" onclick="changeColor('#000000')"></button>
+                    <button class="circulo circulo-rojo" onclick="changeColor('#FF0000')"></button>
+                    <button class="circulo circulo-azul" onclick="changeColor('#0B52D6')"></button>
+                    <button class="circulo circulo-verde" onclick="changeColor('#21c640')"></button>
+                    <button class="circulo circulo-amarillo" onclick="changeColor('#FFD133')"></button>
+                    <button class="circulo circulo-violeta" onclick="changeColor('#9d23de')"></button>
+                    <button class="circulo circulo-rosa" onclick="changeColor('#e773e0')"></button>
+                    <button class="circulo circulo-marron" onclick="changeColor('#89602e')"></button>
+                    <button class="circulo circulo-naranja" onclick="changeColor('#FD801A')"></button>
+                </div>
+                
             </div>
        
             <canvas id="lienzo" width="500" height="500" style="border:1px solid #000000;"></canvas>
