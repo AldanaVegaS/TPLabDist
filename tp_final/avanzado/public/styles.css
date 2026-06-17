@@ -46,25 +46,101 @@ h1 {
     flex: 0 0 500px;
 }
 
-.contenedor {
+/* Barra de herramientas */
+.contenedor-herrramientas {
     display: flex;
-    gap: 20px; /* Espacio entre círculos */
-    padding: 20px;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    flex-wrap: wrap;
 }
 
-.contenedor-circulos {
+.divider {
+    width: 1px;
+    height: 32px;
+    background: #e0e0e0;
+    margin: 0 4px;
+}
+
+
+.tool-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background: transparent;
     display: flex;
-    gap: 20px; /* Espacio entre círculos */
-    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.tool-btn:hover {
+    background: #f0f0f0;
+}
+
+.tool-btn.active {
+    background: #EEEDFE;
+    border-color: #AFA9EC;
+}
+
+.tool-btn i {
+    color: #444;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.tool-btn.active i {
+    color: #3C3489;
+}
+
+/* Slider de grosor */
+.contenedor-grosor {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#grosor {
+    width: 90px;
+    height: 4px;
+    opacity: 1;
+    cursor: pointer;
+    accent-color: #534AB7;
+}
+
+.label-grosor {
+    font-size: 12px;
+    color: #888;
+    min-width: 18px;
+    text-align: right;
 }
 
 .circulo {
-    width: 40px;
-    height: 40px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.12s, border-color 0.12s;
+    outline: none;
+    flex-shrink: 0;
+}
+
+.circulo:hover {
+    transform: scale(1.15);
+}
+
+.circulo.active {
+    border-color: #222;
 }
 
 /* Colores individuales */
+.circulo-negro  { background-color: #000000; }
 .circulo-rojo { background-color: #FF0000; }
 .circulo-azul { background-color: #0B52D6; }
 .circulo-verde { background-color: #21c640; }
@@ -83,6 +159,14 @@ i {
 button{
     background-color: rgb(255, 255, 255);
     border-color: white;
+}
+
+/* Canvas */
+#lienzo {
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background: #ffffff;
+    cursor: crosshair;
 }
 
 .pantalla-bienvenida {
