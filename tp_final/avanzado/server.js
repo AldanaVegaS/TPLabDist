@@ -26,6 +26,11 @@ io.on('connection', (socket) => {
         io.emit('jugadores:lista', listaJugadores());
     });
 
+    socket.on('draw', (linea) => {
+        console.log('servidor recibió draw:', linea);
+        socket.broadcast.emit('draw', linea);
+    });
+
     socket.on('disconnect', () => {
         console.log('Se desconecto cliente: ', socket.id);
         delete jugadores[socket.id];

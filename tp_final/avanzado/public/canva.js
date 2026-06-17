@@ -42,10 +42,23 @@ function draw(event) {
     ctx.strokeStyle=drawColor;
     ctx.lineWidth=lineWidth;
   }
+
+  const fromX = coord.x; // guardá la posición anterior
+  const fromY = coord.y;
   ctx.moveTo(coord.x, coord.y);
   reposition(event);
   ctx.lineTo(coord.x, coord.y);
   ctx.stroke();
+
+  socket.emit('draw', {
+    fromX,
+    fromY,
+    toX: coord.x,
+    toY: coord.y,
+    color: drawColor,
+    width: lineWidth
+  });
+  //console.log('emit draw enviado');
 }
 
 function changeColor(color){
@@ -57,12 +70,14 @@ function changeColor(color){
 
 function erase() {
     erasing=true
+    tool="eraser"
     document.getElementById('eraser').classList.add('active');
     document.getElementById('pencil').classList.remove('active');
 }
 
 function pencil() {
     erasing=false
+    tool="pencil"
     document.getElementById('pencil').classList.add('active');
     document.getElementById('eraser').classList.remove('active');
 }
@@ -71,3 +86,17 @@ function pencil() {
   if (tool === "eraser") return;
   lineWidth = this.value;
 }
+
+socket.on("draw", data => {
+  //console.log('draw recibido', data);
+    ctx.beginPath();
+    ctx.lineCap = "round";
+
+    ctx.strokeStyle = data.color;
+    ctx.lineWidth = data.width;
+
+    ctx.moveTo(data.fromX, data.fromY);
+    ctx.lineTo(data.toX, data.toY);
+
+    ctx.stroke();
+});
