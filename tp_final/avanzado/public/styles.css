@@ -27,7 +27,6 @@ h1 {
 .columnas > div {
     display: flex;
     flex-direction: column;
-    border: 1px solid #000000;
     border-radius: 8px;
     padding: 15px;
 }
@@ -39,6 +38,7 @@ h1 {
 #dibujo-canvas {
     flex: 1;
     align-items: center;
+    background-color: #ececec;
 }
 
 /* Columna derecha: chat */
@@ -115,6 +115,23 @@ button{
     font-size: 1rem;
 }
 
+#chat-header {
+    display: flex;
+    align-items: center; 
+    gap: 8px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    flex-shrink: 0;     
+    color: #7728e7;
+}
+
+#chat-header i {
+    font-size: 1.3rem;     
+    margin: 0;       
+    color: inherit;  
+}
+
 #form-inicio button {
     padding: 10px;
     border: 1px solid #000;
@@ -126,21 +143,28 @@ button{
 #mensajes {
     flex: 1;
     overflow-y: auto;
-    border: 1px solid #ccc;
+    border: 1px solid #adadad;
     border-radius: 6px;
     padding: 8px;
     min-height: 0;
 }
 
-.mensaje { padding: 2px 0; word-break: break-word; }
+.msj {
+    padding: 20px 20px;
+    word-break: break-word;
+    background-color: #ececec;
+    border-radius: 20px;
+    margin: 20px 10px 10px 10px;
+}
 
 #mjs {
     flex: 1;          
     min-height: 0;     
     overflow-y: auto;  
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    border: 1px solid #dfdbdb;
+    border-radius: 20px;
     padding: 8px;
+    box-shadow: 0 4px 6px -3px rgba(0, 0, 0, 0.4);
 }
 
 #form-chat {
@@ -150,5 +174,26 @@ button{
     flex-shrink: 0;  
 }
 
-#input-chat { flex: 1; padding: 8px; border: 1px solid #999; border-radius: 6px; }
-#form-chat button { padding: 8px 12px; border: 1px solid #000; border-radius: 6px; cursor: pointer; }
+#input-chat {
+    flex: 1;
+    padding: 14px 16px;   
+    font-size: 1.1rem; 
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px -3px rgba(0, 0, 0, 0.4);
+}
+
+#form-chat button {
+    border: none;
+    border-radius: 10px;
+    background-color: #7728e7;
+    color: #fff;
+    padding: 8px 14px;
+    cursor: pointer;
+}
+
+#form-chat button i {
+    font-size: 1.1rem;
+    margin: 0;
+    color: #fff;
+}
