@@ -5,7 +5,7 @@
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
     gap: 10px;
     margin: 0;
     padding: 20px;
@@ -122,3 +122,33 @@ button{
     cursor: pointer;
     font-size: 1rem;
 }
+
+#mensajes {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 8px;
+    min-height: 0;
+}
+
+.mensaje { padding: 2px 0; word-break: break-word; }
+
+#mjs {
+    flex: 1;          
+    min-height: 0;     
+    overflow-y: auto;  
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 8px;
+}
+
+#form-chat {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    flex-shrink: 0;  
+}
+
+#input-chat { flex: 1; padding: 8px; border: 1px solid #999; border-radius: 6px; }
+#form-chat button { padding: 8px 12px; border: 1px solid #000; border-radius: 6px; cursor: pointer; }

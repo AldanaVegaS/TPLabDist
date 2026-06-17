@@ -22,4 +22,6 @@ function iniciarJuego(nombre) {
         divUsuarios.innerHTML = '<h3>Jugadores</h3>' +
             lista.map(j => `<div>${j.nombre}: ${j.puntos}</div>`).join('');
     });
+
+    inicializarChat(socket);
 }

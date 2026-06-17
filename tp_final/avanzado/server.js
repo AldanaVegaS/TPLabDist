@@ -26,6 +26,12 @@ io.on('connection', (socket) => {
         io.emit('jugadores:lista', listaJugadores());
     });
 
+    socket.on('chat:enviar', ({texto}) => {
+        const jugador = jugadores[socket.id];
+        if (!jugador || !texto || !texto.trim()) return;
+        io.emit('chat:nuevo', { nombre: jugador.nombre, texto: texto.trim() });
+    })
+
     socket.on('disconnect', () => {
         console.log('Se desconecto cliente: ', socket.id);
         delete jugadores[socket.id];
