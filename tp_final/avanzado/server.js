@@ -31,6 +31,10 @@ io.on('connection', (socket) => {
         if (!jugador || !texto || !texto.trim()) return;
         io.emit('chat:nuevo', { nombre: jugador.nombre, texto: texto.trim() });
     })
+    socket.on('draw', (linea) => {
+        console.log('servidor recibió draw:', linea);
+        socket.broadcast.emit('draw', linea);
+    });
 
     socket.on('disconnect', () => {
         console.log('Se desconecto cliente: ', socket.id);
