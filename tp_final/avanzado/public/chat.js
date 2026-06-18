@@ -16,9 +16,14 @@ function inicializarChat(socket){
         agregarMensaje(divMensajes, `${nombre}: ${texto}`);
     });
 
-    function agregarMensaje(divMensajes,  texto) {
+    socket.on('chat:sistema', ({ texto }) => {
+        agregarMensaje(divMensajes, texto, 'msj-sistema');
+    });
+
+    function agregarMensaje(divMensajes, texto, claseExtra) {
         const div = document.createElement('div');
         div.classList.add('msj');
+        if (claseExtra) div.classList.add(claseExtra);
         div.textContent = texto;
         divMensajes.appendChild(div);
         divMensajes.scrollTop = divMensajes.scrollHeight;

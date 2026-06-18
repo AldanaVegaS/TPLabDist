@@ -36,5 +36,17 @@ function iniciarJuego(nombre) {
         tiempoEl.textContent = temporizador;
     });
 
+    const palabraEl = document.getElementById('texto-palabra');
+
+    socket.on('ronda:nueva', ({ dibujanteId, palabraOculta }) => {
+        if (socket.id !== dibujanteId) {
+            palabraEl.textContent = palabraOculta;
+        }
+    });
+
+    socket.on('ronda:palabra', ({ palabra }) => {
+        palabraEl.textContent = palabra;
+    });
+
     inicializarChat(socket);
 }

@@ -36,12 +36,20 @@ h1 {
     background-color: #f4f4f4;
 }
 
+#lista-jugadores {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
 .jugador {
     display: flex;
     align-items: center;
     gap: 12px;
     width: 90%;
-    height: 30%;
+    flex-shrink: 0;
     background: #7728e7;
     color: #fff;
     border-radius: 12px;
@@ -309,6 +317,7 @@ button{
 .pantalla-bienvenida {
     justify-content: center;
     align-items: center;
+    background-color: #7728e7;
 }
 
 #inicio {
@@ -316,7 +325,8 @@ button{
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    border: 1px solid #000000;
+    background-color: #fff;
+    box-shadow: 0 4px 6px -3px rgba(0, 0, 0, 0.4);
     border-radius: 8px;
     padding: 40px;
     text-align: center;
@@ -355,10 +365,12 @@ button{
 
 #form-inicio button {
     padding: 10px;
-    border: 1px solid #000;
+    border: 1px solid #7728e7;
     border-radius: 6px;
     cursor: pointer;
     font-size: 1rem;
+    background-color: #7728e7;
+    color: #fff;
 }
 
 #mensajes {
@@ -376,6 +388,14 @@ button{
     background-color: #ececec;
     border-radius: 20px;
     margin: 20px 10px 10px 10px;
+}
+
+.msj-sistema {
+    background-color: #ece4fb;
+    color: #7728e7;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
 }
 
 #mjs {
