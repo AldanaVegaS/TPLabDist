@@ -10,6 +10,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 const jugadores = {};
+let temporizador = 60;
 
 function listaJugadores(){
     return Object.values(jugadores).map(j => ({ nombre: j.nombre, puntos: j.puntos }));
@@ -42,6 +43,13 @@ io.on('connection', (socket) => {
         io.emit('jugadores:lista', listaJugadores());
     })
 })
+
+// Reloj global: un único temporizador compartido por todos los jugadores.
+setInterval(() => {
+    io.emit('actualizar-hora', { temporizador });
+    temporizador--;
+    if (temporizador < 0) temporizador = 60;
+}, 1000);
 
 
 server.listen(PORT, () => {

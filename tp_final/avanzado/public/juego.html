@@ -8,12 +8,36 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
 </head>
 <body>
-    <h1>FAIDibujillo</h1>
     <div class="columnas">
         <div id="usuarios">
-
+            <h1 class="arcoiris">
+                <span>F</span><span>A</span><span>I</span><span>D</span><span>i</span><span>b</span><span>u</span><span>j</span><span>i</span><span>l</span><span>l</span><span>o</span>
+            </h1>
+            <div id="lista-jugadores"></div>
         </div>
         <div id="dibujo-canvas">
+            <div id="barra-juego">
+                <div id="ronda">
+                    <div class="titulo-ronda">Ronda</div>
+                    <div id="numero-ronda">1/3</div>
+                </div>
+                <div id="reloj">
+                    <div id="tiempo">60</div>
+                    <div id="segundos">
+                        <span>
+                            Segundos
+                        </span>
+                    </div>
+                </div>
+                <div id="palabra">
+                    <div class="titulo-palabra">Palabra</div>
+                    <div id="texto-palabra">
+                        <span>Palabra</span>
+                    </div>
+                </div>
+            </div>
+            <canvas id="lienzo" width="500" height="500" style="border:1px solid #000000;"></canvas>
+
             <div class="contenedor-herrramientas">
                 <button class="tool-btn" id="eraser" onclick="erase()">
                     <i class="fas fa-eraser"></i>
@@ -45,8 +69,6 @@
                 </div>
                 
             </div>
-       
-            <canvas id="lienzo" width="500" height="500" style="border:1px solid #000000;"></canvas>
         </div>
         <div id="chat-jugadores">
             <div id="chat-header">
