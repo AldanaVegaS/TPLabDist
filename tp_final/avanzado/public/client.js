@@ -16,6 +16,15 @@ function iniciarJuego(nombre) {
         socket.emit('unirse', { nombre });
     });
 
+    socket.on('esperando:jugadores', ({ actuales, necesarios }) => {
+        canvas.style.pointerEvents = 'none';
+        document.querySelector('.contenedor-herrramientas').style.pointerEvents = 'none';
+
+        document.getElementById('texto-esperando').textContent =
+            `${actuales}/${necesarios} jugadores conectados`;
+        document.getElementById('overlay-esperando').style.display = 'flex';
+    });
+
     const divUsuarios = document.getElementById('lista-jugadores');
 
     socket.on('jugadores:lista', (lista) => {
@@ -37,16 +46,41 @@ function iniciarJuego(nombre) {
     });
 
     const palabraEl = document.getElementById('texto-palabra');
+    const nroRondaEl = document.getElementById('numero-ronda')
 
-    socket.on('ronda:nueva', ({ dibujanteId, palabraOculta }) => {
+    socket.on('ronda:nueva', ({ dibujanteId, palabraOculta, numeroRonda }) => {
+        document.getElementById('overlay-esperando').style.display = 'none';
         if (socket.id !== dibujanteId) {
             palabraEl.textContent = palabraOculta;
         }
-    });
+        nroRondaEl.textContent = numeroRonda+"/3";
+    }); 
 
     socket.on('ronda:palabra', ({ palabra }) => {
         palabraEl.textContent = palabra;
     });
 
     inicializarChat(socket);
+
+    socket.on('juego:terminado', ({ ranking }) => {
+        canvas.style.pointerEvents = 'none';
+        document.querySelector('.contenedor-herrramientas').style.pointerEvents = 'none';
+        const listaRanking = document.getElementById('lista-ranking');
+
+        listaRanking.innerHTML = ranking.map((j, i) => `
+            <div class="fila-ranking">
+                <span class="puesto">${i + 1}°</span>
+                <span class="nombre">${j.nombre}</span>
+                <span class="puntos">${j.puntos} pts</span>
+            </div>
+        `).join('');
+
+        document.getElementById('overlay-ranking').style.display = 'flex'
+        });
+
+}
+
+function volverInicio() {
+    localStorage.removeItem('nombreJugador');
+    window.location.href = 'index.html';
 }

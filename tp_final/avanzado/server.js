@@ -15,6 +15,12 @@ let temporizador = 60;
 let palabra = '';
 let dibujanteId = null;
 let adivinaron = new Set();
+let numeroRonda = 1;
+let primerDibujante = null;
+const MAX_RONDAS = 3;
+let juegoTerminado = false;
+let PAUSA_TURNO = 5; 
+const MIN_JUGADORES = 2;
 
 function listaJugadores(){
     return Object.values(jugadores).map(j => ({ nombre: j.nombre, puntos: j.puntos }));
@@ -25,12 +31,23 @@ function iniciarRonda() {
     const ids = Object.keys(jugadores);
     if (ids.length === 0) {           // nadie conectado no hay ronda
         dibujanteId = null;
+        primerDibujante = null;
         return;
     }
 
     // rotar el dibujante al siguiente jugador
     const idxActual = ids.indexOf(dibujanteId);
     dibujanteId = ids[(idxActual + 1) % ids.length];
+
+    if(primerDibujante === null){
+        primerDibujante = dibujanteId;
+    }else if (dibujanteId === primerDibujante){
+        numeroRonda++;
+        if (numeroRonda > MAX_RONDAS) {
+            terminarJuego();
+            return; 
+        }
+    }
 
     // elegir palabra al azar y resetear el estado de la ronda
     palabra = palabras[Math.floor(Math.random() * palabras.length)];
@@ -41,10 +58,20 @@ function iniciarRonda() {
     io.emit('ronda:nueva', {
         dibujanteId,
         dibujanteNombre: jugadores[dibujanteId].nombre,
-        palabraOculta
+        palabraOculta,
+        numeroRonda
     });
 
     io.to(dibujanteId).emit('ronda:palabra', { palabra: palabra });
+    io.emit('canvas:limpiar');
+}
+
+function terminarJuego() {
+    juegoTerminado = true;
+    dibujanteId = null;
+
+    const ranking = listaJugadores().sort((a, b) => b.puntos - a.puntos);
+    io.emit('juego:terminado', { ranking });
 }
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -56,15 +83,23 @@ io.on('connection', (socket) => {
         jugadores[socket.id] = { nombre, puntos: 0 };
         io.emit('jugadores:lista', listaJugadores());
 
-        if (!dibujanteId) {
+        const cantidadJugadores = Object.keys(jugadores).length;
+
+        if (!dibujanteId && cantidadJugadores>=MIN_JUGADORES) {
             iniciarRonda();
+        } else if (!dibujanteId) {
+            io.emit('esperando:jugadores', {
+                actuales: cantidadJugadores,
+                necesarios: MIN_JUGADORES
+            });
         } else {
             // hay una ronda activa le mandamos el estado actual al jugador
             const palabraOculta = palabra.replace(/\S/g, '_ ').trim();
             socket.emit('ronda:nueva', {
                 dibujanteId,
                 dibujanteNombre: jugadores[dibujanteId].nombre,
-                palabraOculta
+                palabraOculta,
+                numeroRonda
             });
         }
     });
@@ -97,7 +132,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('draw', (linea) => {
-        console.log('servidor recibió draw:', linea);
+        if(socket.id != dibujanteId) return;
         socket.broadcast.emit('draw', linea);
     });
 
@@ -107,7 +142,18 @@ io.on('connection', (socket) => {
         delete jugadores[socket.id];
         io.emit('jugadores:lista', listaJugadores());
 
-         if (eraDibujante) {
+        const cantidadJugadores = Object.keys(jugadores).length;
+
+        if (cantidadJugadores < MIN_JUGADORES) {
+            dibujanteId = null;
+            primerDibujanteDeLaVuelta = null;
+            terminarJuego();
+            return;
+        }
+
+        primerDibujante = null;
+
+        if (eraDibujante) {
             dibujanteId = null;
             iniciarRonda();
         }
@@ -117,7 +163,7 @@ io.on('connection', (socket) => {
 /// reloj
 setInterval(() => {
 
-    if (!dibujanteId) return;
+    if (!dibujanteId || juegoTerminado) return;
 
     io.emit('actualizar-hora', { temporizador });
     temporizador--;

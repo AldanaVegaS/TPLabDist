@@ -84,6 +84,22 @@
             </form>
         </div>
     </div>
+    <div id="overlay-esperando" style="display: none;">
+        <div class="tarjeta-ranking">
+            <h2>Esperando jugadores</h2>
+            <p class="aviso" id="texto-esperando">0/2 jugadores conectados</p>
+        </div>
+    </div>
+
+    <div id="overlay-ranking" style="display: none;">
+        <div class="tarjeta-ranking">
+            <h2>¡Juego terminado!</h2>
+            <div class="lista-ranking" id="lista-ranking">
+            </div>
+            <button id="btn-volver-inicio" onclick="volverInicio()">Volver al inicio</button>
+        </div>
+    </div>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="chat.js"></script>
     <script src="client.js"></script>
