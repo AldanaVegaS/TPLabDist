@@ -18,7 +18,7 @@ function iniciarJuego(nombre) {
 
     socket.on('esperando:jugadores', ({ actuales, necesarios }) => {
         canvas.style.pointerEvents = 'none';
-        document.querySelector('.contenedor-herrramientas').style.pointerEvents = 'none';
+        document.querySelector('.contenedor-herramientas').style.pointerEvents = 'none';
 
         document.getElementById('texto-esperando').textContent =
             `${actuales}/${necesarios} jugadores conectados`;
@@ -30,7 +30,7 @@ function iniciarJuego(nombre) {
     socket.on('jugadores:lista', (lista) => {
         divUsuarios.innerHTML = '<h3>Jugadores</h3>' +
             lista.map(j => `
-                <div class="jugador">
+                <div class="jugador ${j.esDibujante ? 'dibujante' : ''}">
                     <div class="avatar"><i class="fas fa-user"></i></div>
                     <div class="info-jugador">
                         <span class="nombre-jugador">${j.nombre}</span>
@@ -47,10 +47,20 @@ function iniciarJuego(nombre) {
 
     const palabraEl = document.getElementById('texto-palabra');
     const nroRondaEl = document.getElementById('numero-ronda')
+    const audioRonda = document.getElementById('audio-ronda');
 
     socket.on('ronda:nueva', ({ dibujanteId, palabraOculta, numeroRonda }) => {
         document.getElementById('overlay-esperando').style.display = 'none';
-        if (socket.id !== dibujanteId) {
+
+        // sonido al comenzar un nuevo dibujante
+        audioRonda.currentTime = 0;
+        audioRonda.play().catch(() => {});
+
+        const dibujante = socket.id === dibujanteId;
+        canvas.style.pointerEvents = dibujante ? 'auto' : 'none';
+        document.querySelector('.contenedor-herramientas').style.pointerEvents = dibujante ? 'auto' : 'none';
+
+        if (!dibujante) {
             palabraEl.textContent = palabraOculta;
         }
         nroRondaEl.textContent = numeroRonda+"/3";
@@ -64,7 +74,7 @@ function iniciarJuego(nombre) {
 
     socket.on('juego:terminado', ({ ranking }) => {
         canvas.style.pointerEvents = 'none';
-        document.querySelector('.contenedor-herrramientas').style.pointerEvents = 'none';
+        document.querySelector('.contenedor-herramientas').style.pointerEvents = 'none';
         const listaRanking = document.getElementById('lista-ranking');
 
         listaRanking.innerHTML = ranking.map((j, i) => `

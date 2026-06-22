@@ -23,7 +23,11 @@ let PAUSA_TURNO = 5;
 const MIN_JUGADORES = 2;
 
 function listaJugadores(){
-    return Object.values(jugadores).map(j => ({ nombre: j.nombre, puntos: j.puntos }));
+    return Object.entries(jugadores).map(([id, j]) => ({
+        nombre: j.nombre,
+        puntos: j.puntos,
+        esDibujante: id === dibujanteId
+    }));
 }
 
 
@@ -53,6 +57,7 @@ function iniciarRonda() {
     palabra = palabras[Math.floor(Math.random() * palabras.length)];
     adivinaron.clear();
     temporizador = 60;
+    juegoTerminado = false;
 
     const palabraOculta = palabra.replace(/\S/g, '_ ').trim();
     io.emit('ronda:nueva', {
@@ -62,7 +67,15 @@ function iniciarRonda() {
         numeroRonda
     });
 
+    io.emit('chat:sistema', {
+        texto: `¡${jugadores[dibujanteId].nombre} comienza a dibujar!`
+    })
+
+    // actualizar el listado para resaltar al nuevo dibujante
+    io.emit('jugadores:lista', listaJugadores());
+
     io.to(dibujanteId).emit('ronda:palabra', { palabra: palabra });
+    
     io.emit('canvas:limpiar');
 }
 
@@ -72,6 +85,21 @@ function terminarJuego() {
 
     const ranking = listaJugadores().sort((a, b) => b.puntos - a.puntos);
     io.emit('juego:terminado', { ranking });
+}
+
+function reiniciarJuego() {
+    dibujanteId = null;
+    primerDibujante = null;
+    numeroRonda = 1;
+    temporizador = 60;
+    palabra = '';
+    adivinaron.clear();
+    juegoTerminado = false;
+
+    // los puntos arrancan de cero en cada
+    for (const id in jugadores) {
+        jugadores[id].puntos = 0;
+    }
 }
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -86,6 +114,7 @@ io.on('connection', (socket) => {
         const cantidadJugadores = Object.keys(jugadores).length;
 
         if (!dibujanteId && cantidadJugadores>=MIN_JUGADORES) {
+            reiniciarJuego();
             iniciarRonda();
         } else if (!dibujanteId) {
             io.emit('esperando:jugadores', {
@@ -146,12 +175,12 @@ io.on('connection', (socket) => {
 
         if (cantidadJugadores < MIN_JUGADORES) {
             dibujanteId = null;
-            primerDibujanteDeLaVuelta = null;
             terminarJuego();
             return;
         }
 
-        primerDibujante = null;
+        if (socket.id === primerDibujante)
+            primerDibujante = null;
 
         if (eraDibujante) {
             dibujanteId = null;

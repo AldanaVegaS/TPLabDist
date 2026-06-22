@@ -50,11 +50,15 @@ h1 {
     gap: 12px;
     width: 90%;
     flex-shrink: 0;
-    background: #7728e7;
+    background: #4a4a4a;
     color: #fff;
     border-radius: 12px;
     padding: 8px 12px;
     margin-bottom: 8px;
+}
+
+.jugador.dibujante {
+    background: #7728e7;
 }
 
 .jugador .avatar {
@@ -69,8 +73,12 @@ h1 {
 }
 
 .jugador .avatar i {
-    color: #7728e7;
+    color: #4a4a4a;
     font-size: 1.2rem;
+}
+
+.jugador.dibujante .avatar i {
+    color: #7728e7;
 }
 
 .jugador .info-jugador {
@@ -100,7 +108,7 @@ h1 {
 }
 
 /* Barra de herramientas */
-.contenedor-herrramientas {
+.contenedor-herramientas {
     display: flex;
     align-items: center;
     gap: 8px;

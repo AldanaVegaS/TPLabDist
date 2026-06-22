@@ -38,7 +38,7 @@
             </div>
             <canvas id="lienzo" width="500" height="500" style="border:1px solid #000000;"></canvas>
 
-            <div class="contenedor-herrramientas">
+            <div class="contenedor-herramientas">
                 <button class="tool-btn" id="eraser" onclick="erase()">
                     <i class="fas fa-eraser"></i>
                 </button>
@@ -99,6 +99,8 @@
             <button id="btn-volver-inicio" onclick="volverInicio()">Volver al inicio</button>
         </div>
     </div>
+
+    <audio id="audio-ronda" src="ronda.wav" preload="auto"></audio>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="chat.js"></script>
