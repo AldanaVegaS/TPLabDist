@@ -21,6 +21,7 @@ const MAX_RONDAS = 3;
 let juegoTerminado = false;
 let PAUSA_TURNO = 5; 
 const MIN_JUGADORES = 2;
+let trazos = []; //guarda los trazos de la ronda actual
 
 function listaJugadores(){
     return Object.entries(jugadores).map(([id, j]) => ({
@@ -38,7 +39,8 @@ function iniciarRonda() {
         primerDibujante = null;
         return;
     }
-
+    trazos = [];
+    
     // rotar el dibujante al siguiente jugador
     const idxActual = ids.indexOf(dibujanteId);
     dibujanteId = ids[(idxActual + 1) % ids.length];
@@ -130,6 +132,7 @@ io.on('connection', (socket) => {
                 palabraOculta,
                 numeroRonda
             });
+            socket.emit('canva:sincronizar', trazos)
         }
     });
 
@@ -162,6 +165,7 @@ io.on('connection', (socket) => {
 
     socket.on('draw', (linea) => {
         if(socket.id != dibujanteId) return;
+        trazos.push(linea);
         socket.broadcast.emit('draw', linea);
     });
 

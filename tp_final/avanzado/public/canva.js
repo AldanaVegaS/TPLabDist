@@ -91,6 +91,12 @@ function pencil() {
   lineWidth = this.value;
 }
 
+socket.on('canva:sincronizar',(trazos)=>{
+        trazos.forEach(trazo=>{
+            dibujarTrazo(trazo);
+        })
+    })
+
 socket.on("draw", dibujarTrazo);
 
 socket.on("canvas:limpiar", () => {
